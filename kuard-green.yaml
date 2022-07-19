@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: kuard
+    version: green
+  name: kuard-green
+  namespace: kuard
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kuard
+      version: green
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: kuard
+        version: green
+    spec:
+      containers:
+      - image: gcr.io/kuar-demo/kuard-amd64:green
+        name: kuar-amd64
+        ports:
+        - containerPort: 8080
+        resources: {}

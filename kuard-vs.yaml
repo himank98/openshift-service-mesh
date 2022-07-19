@@ -1,0 +1,23 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: kuard-vs
+  namespace: kuard
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - kuard-gw
+  http:
+    - match:
+        - uri:
+            prefix: "/"
+      route:
+        - destination:
+            host: kuard
+            subset: kuard-blue
+          weight: 50
+        - destination:
+            host: kuard
+            subset: kuard-green
+          weight: 50
